@@ -4,40 +4,90 @@ import ErrorBoundry from '../../components/ErrorBoundry.js';
 import RoomList from '../../components/RoomList.js';
 import SearchBox from '../../components/SearchBox.js';
 import Scroll from '../../components/Scroll.js';
-import '../../components/rooms_list.js';
-
+import {roomsData} from '../../components/rooms_list';
 
 export default class Rooms extends Component {
 
     constructor(props) {
 
         super(props);
-        this.state = {value: '',
-                      rooms: []                        
-        };
-    
-        this.onSearchChange = this.onSearchChange.bind(this);
+        this.state = {  rooms: [],
+                        value: 'default',
+                        klimatyzacja: true,
+                        lazienka: true,
+                        balkon: true,
+                        aneks_kuchenny: true,
+                        parter: true,
+                        alergia: true,
+                        zameldowanie: true,
+                        zwierze: true,
+                        dostawka: true,
+                        parking: true,
+                        sniadanie: true,
+                        budzenie: true
+                      };
 
-      };
-
-    componentDidMount(){
-      fetch('../../components/rooms_list.js').then(response => response.json())
-        .then(rooms=> this.setState({ rooms: rooms }));
+      this.onSearchChange = this.onSearchChange.bind(this); 
+      // this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
+
 
     onSearchChange = (event) => {
-      this.setState({ value: event.target.value });
+
+      const target = event.target;
+      const state = target.type === 'checkbox' ? target.onSearchChange : target.state;
+      const name = event.target.name;
+
+      this.setState({
+        
+        [name]: state,
+        value: event.target.value
+
+        // value: event.target.value,
+        // klimatyzacja: event.target.value,
+        // lazienka: event.target.value,
+        // balkon: event.target.value,
+        // aneks_kuchenny: event.target.value,
+        // parter: event.target.value,
+        // alergia: event.target.value,
+        // zameldowanie: event.target.value,
+        // zwierze: event.target.value,
+        // dostawka: event.target.value,
+        // parking: event.target.value,
+        // sniadanie: event.target.value,
+        // budzenie: event.target.value
+
+      });
     }
+
+    // handleSubmit(event) {
+    //   event.preventDefault();
+    // }
 
 
     render(){
+
+
     const { rooms } = this.state;
-    const filteredRooms = rooms.filter(room => {
-        return room.name;
-    })
+    const filteredRooms = roomsData.filter(room => {
+        return (  rooms.value,
+                  rooms.klimatyzacja,
+                  rooms.lazienka,
+                  rooms.balkon,
+                  rooms.aneks_kuchenny,
+                  rooms.parter,
+                  rooms.alergia,
+                  rooms.zameldowanie,
+                  rooms.zwierze,
+                  rooms.dostawka,
+                  rooms.parking,
+                  rooms.sniadanie,
+                  rooms.budzenie )
+        });
 
     return (
-
+      
       <div>
         <div className="container">
           <h2 className="title has-text-centered "> Nasze pokoje </h2>
