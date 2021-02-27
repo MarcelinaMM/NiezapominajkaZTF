@@ -1,0 +1,34 @@
+.hero {
+  background: url("../../assets/dom.jpg");
+  background-size: cover;
+  background-position: 0 40%;
+  opacity: 0.75; }
+
+.special_offer_head {
+  text-align: center;
+  color: #343A4A;
+  margin-bottom: 4rem; }
+  @media screen and (max-width: 768px) {
+    .special_offer_head .title {
+      font-weight: bold; } }
+  @media screen and (min-width: 769px), print {
+    .special_offer_head .title {
+      font-size: 2.5rem; } }
+  @media screen and (min-width: 1000px) {
+    .special_offer_head .title {
+      font-size: 4rem;
+      margin-top: 2rem; } }
+
+h2 {
+  margin: 1.5rem 0 2rem 0 !important; }
+
+.fa-cog {
+  font-size: 40px; }
+
+@media screen and (min-width: 1000px) {
+  #learn {
+    margin-bottom: 2rem; } }
+
+@media screen and (min-width: 769px), print {
+  .pd {
+    padding: 2em 0; } }
