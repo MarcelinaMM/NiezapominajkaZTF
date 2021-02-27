@@ -4,31 +4,38 @@ import ErrorBoundry from '../../components/ErrorBoundry.js';
 import RoomList from '../../components/RoomList.js';
 import SearchBox from '../../components/SearchBox.js';
 import Scroll from '../../components/Scroll.js';
+import '../../components/rooms_list.js';
 
 
 export default class Rooms extends Component {
 
+    constructor(props) {
 
-    constructor(){
-      super()
-      this.state = {
-        rooms: []
-      }
-    }
+        super(props);
+        this.state = {value: '',
+                      rooms: []                        
+        };
+    
+        this.onSearchChange = this.onSearchChange.bind(this);
+
+      };
 
     componentDidMount(){
-      fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json())
-        .then(users => this.setState({ rooms: users }));
+      fetch('../../components/rooms_list.js').then(response => response.json())
+        .then(rooms=> this.setState({ rooms: rooms }));
     }
 
     onSearchChange = (event) => {
-      this.setState({ searchfield: event.target.value });
+      this.setState({ value: event.target.value });
     }
+
+
     render(){
-    const { rooms, searchfield } = this.state;
+    const { rooms } = this.state;
     const filteredRooms = rooms.filter(room => {
-        return room.name.toLowerCase();
+        return room.name;
     })
+
     return (
 
       <div>
@@ -125,13 +132,13 @@ export default class Rooms extends Component {
                     <SearchBox searchChange={this.onSearchChange} />
                     <Scroll>
                         <ErrorBoundry>
-                            <RoomList robots={filteredRooms} />
+                            <RoomList rooms={filteredRooms} />
                         </ErrorBoundry>
                     </Scroll>
                 </div>
         </div>
 
-      // </div>
+       </div>
 
     );
   }
